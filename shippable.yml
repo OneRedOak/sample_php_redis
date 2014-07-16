@@ -4,7 +4,11 @@ php:
   - 5.4
 
 services:
-  - mongodb
+  - redis
+
+env:
+  global:
+    - APP_NAME=rocky-wave-3011
 
 before_script: 
   - mkdir -p shippable/testresults
@@ -12,7 +16,4 @@ before_script:
   - echo "extension = redis.so" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
 
 script:
-  - phpunit --log-junit shippable/testresults/junit.xml --coverage-xml shippable/codecoverage tests/ConnectToMongoTest.php
-
-notifications:
-   email: false
+  - phpunit --log-junit shippable/testresults/junit.xml --coverage-xml shippable/codecoverage test.php
