@@ -6,14 +6,10 @@ php:
 services:
   - redis
 
-env:
-  global:
-    - APP_NAME=rocky-wave-3011
-
 before_script: 
   - mkdir -p shippable/testresults
   - mkdir -p shippable/codecoverage
   - echo "extension = redis.so" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
 
 script:
-  - phpunit --log-junit shippable/testresults/junit.xml --coverage-xml shippable/codecoverage test.php
+  - phpunit  --log-junit shippable/testresults/junit.xml --coverage-xml shippable/codecoverage tests/RedisExampleTest.php
